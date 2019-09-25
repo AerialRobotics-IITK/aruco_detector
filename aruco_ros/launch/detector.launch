@@ -1,0 +1,48 @@
+<launch>
+
+    <arg name="marker1Id"         default="5"/>
+    <arg name="marker2Id"         default="10"/>
+    <arg name="marker3Id"         default="15"/>
+    <arg name="markerSize"        default="0.25"/>    <!-- in m -->
+    <arg name="eye"               default="left"/>
+    <arg name="dct_normalization" default="True" />
+    <arg name="dct_filter_size"   default="2" />
+    <arg name="marker1_frame"     default="marker_hand_frame" />
+    <arg name="marker2_frame"     default="marker_object_frame" />
+    <arg name="marker3_frame"     default="marker_frame" />
+
+
+    <node pkg="aruco_ros" type="triple" name="detector">    
+        <remap from="/camera_info" to="camera/camera_info" />
+        <remap from="/image" to="camera/image_raw" />
+        <remap from="pose1" to="aruco/pose1"/>
+        <remap from="pose2" to="aruco/pose2"/>
+        <remap from="pose3" to="aruco/pose3"/>
+        <remap from="flags" to="aruco/flags"/>
+        <remap from="result" to="aruco/result"/>
+        <remap from="debug" to="aruco/debug"/>
+
+        <param name="image_is_rectified" value="True"/>
+        <param name="marker_size" value="$(arg markerSize)"/>
+        <param name="marker_id1" value="$(arg marker1Id)"/>
+        <param name="marker_id2" value="$(arg marker2Id)"/>
+        <param name="marker_id3" value="$(arg marker3Id)"/>
+        <param name="normalizeImage" value="$(arg dct_normalization)"/>
+        <param name="dct_components_to_remove" value="$(arg dct_filter_size)"/>
+        <param name="parent_name" value="stereo_gazebo_$(arg eye)_camera_optical_frame"/>
+        <param name="child_name1" value="$(arg marker1_frame)" />
+        <param name="child_name2" value="$(arg marker2_frame)" />
+        <param name="child_name3" value="$(arg marker3_frame)" />
+    </node>
+
+    <node pkg="aruco_ros" type="pose" name="aruco_pose" output="screen">
+        <rosparam file="$(find aruco_ros)/cfg/aruco.yaml" />
+        <rosparam file="$(env HOME)/.ros/camera_info/ocam.yaml"/>
+        <remap from="odom" to="odom"/>
+        <remap from="pose1" to="aruco/pose1"/>
+        <remap from="pose2" to="aruco/pose2"/>
+        <remap from="pose3" to="aruco/pose3"/>
+        <remap from="flags" to="aruco/flags"/>
+    </node>
+
+</launch>

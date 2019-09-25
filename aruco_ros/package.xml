@@ -20,8 +20,13 @@
   <depend>image_transport</depend>
   <depend>roscpp</depend>
   <depend>tf</depend>
+  <depend>eigen_conversions</depend>
+  <depend>tf_conversions</depend>
   <depend>aruco</depend>
   <depend>aruco_msgs</depend>
   <depend>sensor_msgs</depend>
   <depend>visualization_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>mav_utils_msgs</depend>
+  <depend>std_msgs</depend>
 </package>
