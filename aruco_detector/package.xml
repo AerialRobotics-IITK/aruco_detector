@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>aruco_ros</name>
+  <name>aruco_detector</name>
   <version>0.2.4</version>
   <description>
     The ARUCO Library has been developed by the Ava group of the Univeristy of Cordoba(Spain).

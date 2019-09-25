@@ -47,7 +47,7 @@ or implied, of Rafael Muñoz Salinas.
 #include <tf/transform_datatypes.h>
 
 #include <dynamic_reconfigure/server.h>
-#include <aruco_ros/ArucoThresholdConfig.h>
+#include <aruco_detector/ArucoThresholdConfig.h>
 
 using namespace cv;
 using namespace aruco;

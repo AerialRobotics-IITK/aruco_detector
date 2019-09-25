@@ -13,7 +13,7 @@
 #include <std_msgs/Int16MultiArray.h>
 
 #include <dynamic_reconfigure/server.h>
-#include <aruco_ros/ArucoThresholdConfig.h>
+#include <aruco_detector/ArucoThresholdConfig.h>
 
 #define exit execFlag == -1
 #define run execFlag == 1
