@@ -8,7 +8,7 @@
     <arg name="corner_refinement" default="LINES" /> <!-- NONE, HARRIS, LINES, SUBPIX -->
 
 
-    <node pkg="aruco_ros" type="single" name="aruco_single">
+    <node pkg="aruco_detector" type="single" name="aruco_single">
         <remap from="/camera_info" to="/camera/camera_info" />
         <remap from="/image" to="/camera/image_raw" />
         <param name="image_is_rectified" value="True"/>

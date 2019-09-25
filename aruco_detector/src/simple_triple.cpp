@@ -105,13 +105,13 @@ void image_callback(const sensor_msgs::ImageConstPtr& msg)
                         pose_pub3.publish(poseMsg);
                         flags[2] = 1;
                     }
-
                     // but drawing all the detected markers
                     markers[i].draw(inImage,Scalar(0,0,255),2);
-                    for(int i=0; i<3; i++){ objects.data.push_back(flags[i]); }
-                    objects.layout.data_offset = cv_ptr->header.seq;
-                    flag_pub.publish(objects);
                 }
+                
+                for(int i=0; i<3; i++){ objects.data.push_back(flags[i]); }
+                objects.layout.data_offset = cv_ptr->header.seq;
+                flag_pub.publish(objects);
 
                 if(image_pub.getNumSubscribers() > 0)
                 {

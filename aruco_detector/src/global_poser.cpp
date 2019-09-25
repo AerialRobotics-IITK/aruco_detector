@@ -40,7 +40,7 @@ mav_utils_msgs::BBPose convertPose(geometry_msgs::Pose msg, int i)
     Eigen::Quaternionf quat = Eigen::Quaternionf(q1.w(), q1.x(), q1.y(), q1.z());
     quadToGlob = quat.toRotationMatrix();
     
-    Eigen::Vector3f camCoord(msg.position.x, msg.position.y, msg.position.z);
+    Eigen::Vector3f camCoord(msg.position.x, msg.position.y, msg.position.z - odom.pose.pose.position.z);
     Eigen::Vector3f quadCoord = camToQuad*camCoord + tCam;
     Eigen::Vector3f globCoord = quadToGlob*quadCoord;
 
@@ -78,9 +78,8 @@ int main(int argc, char **argv)
         tCam(i) = tempList[i];
     }
 
-    int tempIdx;
-    nh.getParam("camera/rotation", tempList);
-    tempIdx = 0;
+    int tempIdx = 0; tempList.clear();
+    ph.getParam("camera/rotation", tempList);
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)

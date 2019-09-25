@@ -12,15 +12,9 @@
     <arg name="marker3_frame"     default="marker_frame" />
 
 
-    <node pkg="aruco_ros" type="triple" name="detector">    
+    <node pkg="aruco_detector" type="triple" name="detector">    
         <remap from="/camera_info" to="camera/camera_info" />
         <remap from="/image" to="camera/image_raw" />
-        <remap from="pose1" to="aruco/pose1"/>
-        <remap from="pose2" to="aruco/pose2"/>
-        <remap from="pose3" to="aruco/pose3"/>
-        <remap from="flags" to="aruco/flags"/>
-        <remap from="result" to="aruco/result"/>
-        <remap from="debug" to="aruco/debug"/>
 
         <param name="image_is_rectified" value="True"/>
         <param name="marker_size" value="$(arg markerSize)"/>
@@ -35,14 +29,14 @@
         <param name="child_name3" value="$(arg marker3_frame)" />
     </node>
 
-    <node pkg="aruco_ros" type="pose" name="aruco_pose" output="screen">
-        <rosparam file="$(find aruco_ros)/cfg/aruco.yaml" />
+    <node pkg="aruco_detector" type="pose" name="aruco_pose" output="screen">
+        <rosparam file="$(find aruco_detector)/cfg/aruco.yaml" />
         <rosparam file="$(env HOME)/.ros/camera_info/ocam.yaml"/>
         <remap from="odom" to="odom"/>
-        <remap from="pose1" to="aruco/pose1"/>
-        <remap from="pose2" to="aruco/pose2"/>
-        <remap from="pose3" to="aruco/pose3"/>
-        <remap from="flags" to="aruco/flags"/>
+        <remap from="pose1" to="detector/pose1"/>
+        <remap from="pose2" to="detector/pose2"/>
+        <remap from="pose3" to="detector/pose3"/>
+        <remap from="flags" to="detector/flags"/>
     </node>
 
 </launch>
